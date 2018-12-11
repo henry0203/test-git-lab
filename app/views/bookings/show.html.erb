@@ -1,0 +1,27 @@
+<div class="container container-resized">
+<h1>Booking</h1>
+  <div class="card-booking">
+    <div>
+      <div class="text-center">
+        <h4>Your booking details</h4>
+      </div>
+      <div class="booking-infos">
+        <p><strong>Lama:</strong> <%= @booking.lama.name %></p>
+        <p><strong>From:</strong> <%= @booking.date_begin %></p>
+        <p><strong>To:</strong> <%= @booking.date_end %></p>
+        <p><strong>Address:</strong> <%= @booking.lama.address %></p>
+        <p><strong>Amount:</strong> <%= @booking.amount %>€</p>
+      </div>
+      <% if @booking.payment %>
+      <div class="text-center">
+        <div class="alert alert-success">Your booking is confirmed !</div>
+      </div>
+      <% else %>
+      <div class="text-center">
+        <%= link_to "Confirm your booking", new_lama_booking_payment_path(params[:lama_id], @booking), class: "btn btn-primary" %>
+      </div>
+      <% end %>
+    </ul>
+    </div>
+  </div>
+</div>

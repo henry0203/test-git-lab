@@ -1,0 +1,109 @@
+
+<div class="links">
+  <% if policy(@lama).edit? %>
+    <%= link_to edit_lama_path(@lama) do %>
+      <i class="fa fa-edit"></i>
+    <% end %>
+  <% end %>
+  <% if policy(@lama).destroy? %>
+    <%= link_to lama_path(@lama), method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <i class="fa fa-trash"></i>
+    <% end %>
+  <% end %>
+</div>
+
+
+<h1><%= @lama.name %></h1>
+<div class="container container-resized">
+  <div class="description">
+    <div class="card-show" style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.4) 0%, rgba(256,0,0,0.3) 50%), url('');"> <!-- cl_image_path @lama.photo, crop: :fill -->
+    </div>
+    <div class="lama-infos">
+      <div>
+        <p><strong>Name: </strong><%= @lama.name %></p>
+      </div>
+      <div>
+        <p><strong>Category: </strong><%= @lama.category %></p>
+      </div>
+      <div>
+        <p><strong>Description: </strong><%= @lama.description %></p>
+      </div>
+      <div>
+        <p id="price-per-day"><strong>Price: </strong><%= @lama.price %>€ per day</p>
+      </div>
+      <div>
+        <p><strong>Address: </strong><%= @lama.address %> <%= @lama.zipcode %></p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <% Booking.where(lama: @lama).each do |booking| %>
+    <input type="hidden" class="booking_date" value="<%= booking.date_begin %>"/>
+    <input type="hidden" class="booking_date" value="<%= booking.date_end %>"/>
+    <% end %>
+  </div>
+
+  <% unless @lama.user == current_user %>
+    <div class="reservation">
+      <%= form_tag(lama_bookings_path(@lama)) do %>
+        <div class="dates form-group">
+          <div class="">
+            <%= label_tag :start_time, 'Check in' %>
+            <div class="input-group date input-date" id="datetimepicker1">
+              <input type='text' name="date_begin" class="form-control" id='datetimepicker3' />
+            </div>
+          </div>
+          <div class="">
+            <%= label_tag :end_time, 'Check out' %>
+            <div class="input-group date input-date" id="datetimepicker2">
+              <input type='text' name="date_end" class="form-control" id='datetimepicker4' />
+            </div>
+          </div>
+          <div>
+            <%= hidden_field_tag 'amount', '0' %>
+          </div>
+        </div>
+        <div class="rest-div">
+          <div class="calculated-price">
+          </div>
+          <div class="text-right">
+            <%= button_tag 'Request to book', type: :submit, class: 'btn btn-primary' %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+
+  <div class="reviews form-group">
+    <% unless current_user == @lama.user %>
+      <h4>New review</h4>
+      <%= render 'reviews/form', lama: @lama, review: @review %>
+    <% end %>
+    <% if @lama.reviews.blank? %>
+      <div class="reviews2">
+        <p>Be the first to leave a review for <%= @lama.name %></p>
+      </div>
+    <% else %>
+      <h4>Reviews</h4>
+      <div class="reviews2">
+        <% @lama.reviews.order('updated_at DESC').each do |review| %>
+          <%= render 'reviews/show', review: review %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div
+    id="lamap"
+    style="width: 100%;
+    height: 600px;"
+    data-marker="<%= @marker.to_json %>"
+  ></div>
+</div>
+
+
+<%= content_for :after_js do %>
+  <%= javascript_pack_tag "show" %>
+<%end%>

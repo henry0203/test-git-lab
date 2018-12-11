@@ -1,0 +1,19 @@
+<div class="container container-resized" style="text-align:center;">
+<h1>Purchase <%= @booking.lama.name %></h1>
+<%= form_tag lama_booking_payments_path(@booking) do %>
+  <div class="payment">
+    <article>
+      <label class="review">
+        <span>Amount: <%= @booking.amount %>€</span>
+      </label>
+    </article>
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="Purchase <%= @booking.lama.name %>"
+    data-email="<%= current_user.email %>"
+    data-description="Great choice"
+    data-amount=""
+    data-currency="€"></script>
+  </div>
+<% end %>
+</div>

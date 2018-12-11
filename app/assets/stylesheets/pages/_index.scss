@@ -1,0 +1,233 @@
+// Import page-specific CSS files here.
+@import "home";
+@import url('https://fonts.googleapis.com/css?family=Permanent+Marker|Roboto+Slab');
+
+body {
+  background-color: #FAFAFA;
+}
+
+.cards {
+  margin-top: 80px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  color: white;
+  opacity: 0.93;
+  background-size: cover;
+  border-radius: 4px;
+  margin-right: 20px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  margin-bottom: 30px;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.card h4 {
+  font-family: 'Roboto Slab', serif;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
+
+
+.none-message {
+  margin-top: 100px;
+  margin-bottom: 500px;
+}
+
+
+.tabs {
+  display: flex;
+  align-items: center;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.tab {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  opacity: 0.3;
+  border-bottom: 5px solid transparent;
+  text-decoration: none;
+  color: black;
+}
+.tab:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+.tab.active {
+  opacity: 1;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  border-bottom: 5px solid #00A699;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+
+
+.booking-inbox {
+  margin-top: 60px;
+}
+.inbox {
+  border: 1px solid #dce0e0;
+  padding: 0 20px;
+  margin: 0;
+}
+.messages {
+  background: white;
+  margin-bottom: 100px
+}
+.message {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid rgba(220,224,244,0.4);
+}
+.message:last-child {
+  border-bottom: none;
+}
+.message-body {
+  flex-grow: 1;
+}
+.message-name {
+  padding-left: 10px;
+  min-width: 100px;
+  margin-top: 13px;
+  margin-right: 50px;
+}
+.message-name h3 {
+  font-size: 13px;
+}
+.message-name p {
+  font-size: 13px;
+  font-weight: lighter;
+  opacity: 0.6;
+}
+.message-body {
+  position: absolute;
+  left: 260px;
+  padding-left: 10px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.7);
+}
+.message-body {
+  display: flex;
+  padding-left: 20px;
+  color: rgba(0,0,0,0.4);
+}
+.message-nothing-body {
+  display: flex;
+  padding-left: 20px;
+  color: rgba(0,0,0,0.4);
+  padding-left: 10px;
+  font-size: 13px;
+  color: rgba(0,0,0,0.7);
+}
+.message-content {
+  margin-right: 25px;
+}
+.message-status {
+  position: absolute;
+  right: 0px;
+}
+.message-body strong{
+  color: rgba(0,0,0,0.9);
+  color: rgba(0,0,0,0.9);
+}
+.message-body p {
+  margin: 6px 0;
+}
+.message-status {
+  font-size: 14px;
+  font-weight: bold;
+}
+.status p {
+  font-size: 14px;
+  color: #00A699;
+  margin-right: 5px;
+}
+.indent-icon p {
+  margin-left: 5px;
+}
+.status.accepted {
+  color: #4EF037;
+}
+.status.declined {
+  color: #C04D00;
+}
+.status.pending {
+  color: #008891;
+}
+
+.flexbox-reservation {
+  display: flex;
+}
+
+.avatar-large {
+  border: 1px solid #A5ECD7;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.avatar {
+  margin-right: 20px;
+}
+
+.select-status {
+  font-size: 15px;
+  height: 25px;
+  padding: 5px;
+}
+
+.validation-status {
+  margin-top: 10px;
+  display: flex;
+  height: 27px;
+  font-size: 17px;
+  align-items: center;
+  line-height: 14px;
+}
+
+.reviews-index {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-top: 20px;
+}
+
+.review-index {
+  background: white;
+  border-radius: 7px;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,0.07),0 1px 0 0 rgba(0,0,0,0.03);
+  padding: 15px 45px;
+  padding-top: 25px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+

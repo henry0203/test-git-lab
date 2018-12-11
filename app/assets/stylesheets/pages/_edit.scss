@@ -1,0 +1,27 @@
+.title h1 {
+  text-align: center;
+  margin-top: 80px;
+}
+
+.edit-lama-form {
+  width: 700px;
+  margin-top: 50px;
+  margin-bottom: 80px;
+}
+
+.btn {
+  opacity: 0.5;
+  border-radius: 5px;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.inputStyling {
+  font-family: 'Roboto Slab', serif;
+  border-radius: 5px;
+}
+
+.fa-glass {
+  font-size: 15px;
+}

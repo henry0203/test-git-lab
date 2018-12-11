@@ -1,0 +1,35 @@
+<div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.2) 0%, rgba(0,36,61,0.6) 50%), url('https://images.unsplash.com/photo-1454357110064-3d600740d47a?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=419adc238de7e5e315010780ba48ab7d&auto=format&fit=crop&w=2250&q=80'); background-position: bottom;">
+  <div class="banner-content">
+    <div class="text">
+      <h1>Rent a lama</h1>
+      <p>The lama that suits you</p>
+      <%= form_tag lamas_path, method: :get do %>
+        <div class="search-bar-home">
+          <%= select_tag :category, options_for_select(['fighter', 'runner', 'hugger', 'party']), class: "form-control search-bar-items" %>
+          <%= text_field_tag :query, params[:query], placeholder: "(optional)", class: "form-control search-bar-items border-rounded" %>
+          <%= button_tag :submit, class: 'btn btn-light border-rounded' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="cards">
+    <% a, b = 0, 2 %>
+    <% unless @lamas.nil? %>
+      <% while @lamas.size > b - 2 %>
+        <div class='row'>
+          <% @lamas[a..b].each do |lama| %>
+            <%= link_to lama_path(lama), class: "card-link" do %>
+              <div class="card " style="background-image: linear-gradient(-225deg, rgba(0,0,0,0.4) 0%, rgba(256,0,0,0.3) 50%), url('');"> <!-- cl_image_path lama.photo, gravity: :face -->
+                <h4><%= lama.name %></h4>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% a += 3 %>
+        <% b += 3 %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

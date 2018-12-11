@@ -1,0 +1,20 @@
+<h1>Add a lama</h1>
+
+<div class="container new-lama-form">
+  <%= simple_form_for @lama do |f| %>
+    <%= f.input :name %>
+    <%= f.input :photo %>
+    <%= f.input :photo_cache, as: :hidden %>
+    <%= f.input :category, collection: ['Fighter', 'Runner', 'Hugger', 'Party'] %>
+    <%= f.input :description %>
+    <%= f.input :address %>
+    <%= f.input :zipcode %>
+    <%= f.input :price %>
+    <div class="text-right">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+    </div>
+  <% end  %>
+</div>
+
+
+

@@ -1,0 +1,18 @@
+2018-12-08 01:14:10.980 CET [70463] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2018-12-08 01:14:10.980 CET [70463] LOG:  listening on IPv6 address "::1", port 5432
+2018-12-08 01:14:10.981 CET [70463] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2018-12-08 01:14:10.994 CET [70464] LOG:  database system was shut down at 2018-12-08 01:13:57 CET
+2018-12-08 01:14:10.997 CET [70463] LOG:  database system is ready to accept connections
+2018-12-08 01:14:23.905 CET [70488] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:14:57.888 CET [70529] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:15:02.204 CET [70531] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:15:32.232 CET [70664] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:15:33.325 CET [70665] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:15:33.922 CET [70666] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:15:36.953 CET [70667] FATAL:  database "lama-116_development" does not exist
+2018-12-08 01:16:33.123 CET [70682] FATAL:  role "lama-116" does not exist
+2018-12-08 17:05:20.386 CET [71692] FATAL:  database "lama-116_development" does not exist
+2018-12-09 17:36:35.277 CET [73192] FATAL:  database "lama-116_development" does not exist
+2018-12-09 22:05:35.813 CET [74960] ERROR:  database "lama-116_development" is being accessed by other users
+2018-12-09 22:05:35.813 CET [74960] DETAIL:  There is 1 other session using the database.
+2018-12-09 22:05:35.813 CET [74960] STATEMENT:  DROP DATABASE IF EXISTS "lama-116_development"

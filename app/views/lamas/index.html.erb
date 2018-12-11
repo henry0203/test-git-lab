@@ -1,0 +1,35 @@
+<h1>Listing lamas</h1>
+
+<div class="container">
+  <div class="cards">
+    <% a, b = 0, 2 %>
+    <% unless @lamas.first.nil? %>  <!-- || params['query'] == ' ' || params['query'].nil? ||params['query'].size == 0  -->
+      <% while @lamas.size > b - 2 %>
+        <div class='row'>
+          <% @lamas.each do |lama| %>
+            <%= link_to lama_path(lama), class: "card-link" do %>
+              <div class="card " style="background-image: linear-gradient(-225deg, rgba(256,0,0,0.4) 0%, rgba(0,0,0,0.3) 50%), url('');">  <!-- cl_image_path lama.photo, gravity: :face -->
+                <h4><%= lama.name %></h4>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% a += 3 %>
+        <% b += 3 %>
+      <% end %>
+    <div
+      id="map"
+      style="width: 100%;
+      height: 600px;"
+      data-markers="<%= @markers.to_json %>"
+    >
+    </div>
+    <% else %>
+      <h2> Result not founds for the following request </h2>
+        <ul>
+          <li> Catégorie : <%= params['category'] %> </li>
+          <li> Query parameter : <%= params['query'] %> </li>
+        </ul>
+    <% end %>
+  </div>
+</div>

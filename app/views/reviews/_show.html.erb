@@ -1,0 +1,14 @@
+<div class="review">
+  <div class="review-flex">
+    <h4>
+    <% review.rating.times do |rating| %>
+    <i class="fa fa-star" aria-hidden="true"></i>
+    <% end %>
+    <% (5 - review.rating).times do |rating| %>
+    <i class="fa fa-star-o" aria-hidden="true"></i>
+    <% end %>
+    </h4>
+    <p><%= review.user.first_name %> <%= review.user.last_name %></p>
+  </div>
+  <p><%= review.description %></p>
+</div>

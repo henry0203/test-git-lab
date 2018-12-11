@@ -1,0 +1,18 @@
+function refreshForm(innerHTML) {
+  const newReviewForm = document.querySelector('.new_review');
+  newReviewForm.innerHTML = innerHTML;
+}
+
+function addReview(reviewHTML) {
+  const reviews = document.querySelector('.reviews2');
+  const p = document.querySelector('.reviews2 p');
+  reviews.insertAdjacentHTML('afterbegin', reviewHTML);
+  p.innerHTML = "";
+}
+
+<% if @review.errors.any? %>
+  refreshForm('<%= j render "reviews/form", lama: @lama, review: @review %>');
+<% else %>
+  addReview('<%= j render "reviews/show", review: @review %>');
+  refreshForm('<%= j render "reviews/form", lama: @lama, review: Review.new %>');
+<% end %>

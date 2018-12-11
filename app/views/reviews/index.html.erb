@@ -1,0 +1,23 @@
+<!-- CCS in pages/show.css -->
+<h1> Your reviews </h1>
+<div class="container container-resized">
+  <div class="reviews-index">
+    <% @reviews.each do |review| %>
+      <div class="review-index">
+        <div class="review-flex">
+          <p><strong>Lama:</strong> <%= review.lama.name %></p>
+          <p><strong>Owner:</strong> <%= review.lama.user.first_name %> <%= review.lama.user.last_name %></p>
+        </div>
+        <p>
+          <% review.rating.times do |rating| %>
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <% end %>
+          <% (5 - review.rating).times do |rating| %>
+          <i class="fa fa-star-o" aria-hidden="true"></i>
+          <% end %>
+           - <%= review.description %>
+         </p>
+      </div>
+    <% end %>
+  </div>
+</div>

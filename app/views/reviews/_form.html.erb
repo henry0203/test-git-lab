@@ -1,0 +1,9 @@
+<div id="new_review">
+  <%= simple_form_for [lama, review], remote: true do |f| %>
+    <%= f.input :description %>
+    <%= f.input :rating, collection: (1..5).to_a %>
+    <div class="text-right">
+      <%= f.button :submit, class: 'btn btn-primary' %>
+    </div>
+  <% end  %>
+</div>

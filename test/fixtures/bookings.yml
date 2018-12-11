@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_begin: MyString
+  date_end: MyString
+  user: one
+  lama: one
+
+two:
+  date_begin: MyString
+  date_end: MyString
+  user: two
+  lama: two

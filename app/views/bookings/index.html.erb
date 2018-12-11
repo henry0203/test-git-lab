@@ -1,0 +1,226 @@
+<h1>Bookings</h1>
+
+<% if current_user.lamas.first %>
+  <div class="container booking-inbox">
+    <div class="tabs">
+      <a href="#" class="tab active" id="current_tab">Current</a>
+      <a href="#" class="tab" id="my_booking_tab">My bookings</a>
+    </div>
+    <div class="messages" hidden=false id="current_message">
+      <ul class="inbox">
+        <% q = 0 %>
+        <% unless Booking.order('updated_at DESC').first.nil? %>
+          <% Booking.order('updated_at DESC').each do |book| %>
+            <% if book.lama.user == current_user %>
+              <% q += 1 %>
+              <li class="message">
+                <div class="avatar">
+                  <%= cl_image_tag book.user.photo_url, crop: :fill, class:"avatar-large"%>
+                </div>
+                <div class="message-name">
+                  <% if book.state == "Accepted" %>
+                    <div class="message-content status accepted indent-icon flexbox-reservation">
+                      <i class="fa fa-check-circle"></i>
+                      <p><%= book.user.first_name.capitalize %> <%= book.user.last_name.upcase %></p>
+                    </div>
+                  <% elsif book.state == "Declined" %>
+                    <div class="message-content status declined indent-icon flexbox-reservation">
+                      <i class="fa fa-times-circle"></i>
+                      <p><%= book.user.first_name.capitalize %> <%= book.user.last_name.upcase %></p>
+                    </div>
+                  <% else %>
+                    <div class="message-content status pending indent-icon flexbox-reservation">
+                      <i class="fa fa-spinner"></i>
+                      <p><%= book.user.first_name.capitalize %> <%= book.user.last_name.upcase %></p>
+                    </div>
+                  <% end %>
+                  <p><%= book.date_begin.first(10) %></p>
+                </div>
+                <div class="message-body">
+                  <div class="message-content">
+                    <p><strong><%= book.lama.name %></strong></p>
+                    <p>From: <%= book.date_begin.first(10) %>, to: <%= book.date_end.first(10) %></p>
+                  </div>
+                  <div class="message-content">
+                    <p><strong>Amount</strong></p>
+                    <p><%= book.amount %> €</p>
+                  </div>
+                </div>
+                <div class="message-status">
+                  <% if book.state == "Accepted" %>
+                    <div class="message-content status accepted">
+                      <p><strong>Accepted</strong></p>
+                    </div>
+                  <% elsif book.state == "Declined" %>
+                    <div class="message-content status declined">
+                      <p><strong>Declined</strong></p>
+                    </div>
+                  <% else %>
+                    <div class="status-selection">
+                      <%= form_tag bookings_path, method: :patch do %>
+                        <%= select_tag :state, options_for_select(['Pending', 'Accepted', 'Declined']), class: "form-control select-status" %>
+                        <%= hidden_field_tag 'id', book.id %>
+                        <%= button_tag :submit, class: 'btn btn-success validation-status' %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if q == 0 %>
+          <li class="message">
+            <div class="message-nothing-body">
+              <div class="message-content">
+                <h4>Nobody booked your lamas yet...</h4>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="messages" hidden=true  id="my_booking_message">
+      <ul class="inbox">
+        <% unless Booking.where(user: current_user).order('updated_at DESC').first.nil? %>
+          <% Booking.where(user: current_user).order('updated_at DESC').each do |book| %>
+            <li class="message">
+              <div class="message-name">
+                <% if book.state == "Accepted" %>
+                  <div class="message-content status accepted flexbox-reservation">
+                    <p>Reservation</p>
+                    <i class="fa fa-check-circle"></i>
+                  </div>
+                <% elsif book.state == "Declined" %>
+                  <div class="message-content status declined flexbox-reservation">
+                    <p>Reservation</p>
+                    <i class="fa fa-times-circle"></i>
+                  </div>
+                <% else %>
+                  <div class="message-content status pending flexbox-reservation">
+                    <p>Reservation</p>
+                    <i class="fa fa-spinner"></i>
+                  </div>
+                <% end %>
+                <p><%= book.date_end.first(10) %></p>
+              </div>
+              <div class="message-body">
+                <div class="message-content">
+                  <p><strong><%= book.lama.name %></strong></p>
+                  <p>From: <%= book.date_begin.first(10) %>, to: <%= book.date_end.first(10) %></p>
+                </div>
+                <div class="message-content">
+                  <p><strong>Amount</strong></p>
+                  <p><%= book.amount %> €</p>
+                </div>
+              </div>
+              <div class="message-status">
+                <% if book.state == "Accepted" %>
+                  <div class="message-content status accepted">
+                    <p><strong>Accepted</strong></p>
+                  </div>
+                <% elsif book.state == "Declined" %>
+                  <div class="message-content status declined">
+                    <p><strong>Declined</strong></p>
+                  </div>
+                <% else %>
+                  <div class="message-content status pending">
+                    <p><strong>Pending</strong></p>
+                  </div>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="message">
+            <div class="message-nothing-body">
+              <div class="message-content">
+                <h4>You have not booked any lamas...</h4>
+                <%= link_to root_path do%>
+                  <p>But you can change that!</p>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% else %>
+  <div class="container booking-inbox">
+    <div class="tabs">
+      <a href="#" class="tab active" id="my_booking_tab">My bookings</a>
+    </div>
+    <div class="messages" id="my_booking_message">
+      <ul class="inbox">
+        <% unless Booking.where(user: current_user).order('updated_at DESC').first.nil? %>
+          <% Booking.where(user: current_user).order('updated_at DESC').each do |book| %>
+            <li class="message">
+              <div class="message-name">
+                <% if book.state == "Accepted" %>
+                  <div class="message-content status accepted flexbox-reservation">
+                    <p>Reservation</p>
+                    <i class="fa fa-check-circle"></i>
+                  </div>
+                <% elsif book.state == "Declined" %>
+                  <div class="message-content status declined flexbox-reservation">
+                    <p>Reservation</p>
+                    <i class="fa fa-times-circle"></i>
+                  </div>
+                <% else %>
+                  <div class="message-content status pending flexbox-reservation">
+                    <p>Reservation</p>
+                    <i class="fa fa-spinner"></i>
+                  </div>
+                <% end %>
+                <p><%= book.date_end.first(10) %></p>
+              </div>
+              <div class="message-body">
+                <div class="message-content">
+                  <p><strong><%= book.lama.name %></strong></p>
+                  <p>From: <%= book.date_begin.first(10) %>, to: <%= book.date_end.first(10) %></p>
+                </div>
+                <div class="message-content">
+                  <p><strong>Amount</strong></p>
+                  <p><%= book.amount %> €</p>
+                </div>
+              </div>
+              <div class="message-status">
+                <% if book.state == "Accepted" %>
+                  <div class="message-content status accepted">
+                    <p><strong>Accepted</strong></p>
+                  </div>
+                <% elsif book.state == "Declined" %>
+                  <div class="message-content status declined">
+                    <p><strong>Declined</strong></p>
+                  </div>
+                <% else %>
+                  <div class="message-content status pending">
+                    <p><strong>Pending</strong></p>
+                  </div>
+                <% end %>
+              </div>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="message">
+            <div class="message-nothing-body">
+              <div class="message-content">
+                <h4>You have not booked any lamas...</h4>
+                <%= link_to root_path do%>
+                  <p>But you can change that!</p>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+
+<%= content_for :after_js do %>
+  <%= javascript_pack_tag "index" %>
+<%end%>
